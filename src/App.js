@@ -1,4 +1,3 @@
-import "./App.css"; // Import the CSS for the gradient
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import { Scroll, ScrollControls } from "@react-three/drei";
@@ -7,7 +6,6 @@ import Interface from "./components/Interface";
 import ScrollManager from "./components/ScrollManager";
 import Menu from "./components/Menu";
 import { MotionConfig } from "framer-motion";
-
 function App() {
   const [section, setSection] = useState(0);
   const [MenuOpened, setMenuOpened] = useState(false);
@@ -18,9 +16,6 @@ function App() {
 
   return (
     <>
-      {/* Add the animated gradient */}
-      <div className="animated-gradient"></div>
-
       <MotionConfig
         transition={{
           type: "spring",
@@ -31,7 +26,8 @@ function App() {
         }}
       >
         <Canvas shadows camera={{ position: [0, 3, 10], fov: 42 }}>
-          {/* <color attach="background" args={["animated-gradient"]} /> */}
+          {/* Set the background color */}
+          <color attach="background" args={["azure"]} />
 
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
