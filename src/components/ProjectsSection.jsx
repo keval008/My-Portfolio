@@ -38,7 +38,7 @@ const ProjectsSection = () => {
             description: "A Personal Portfolio Website",
             technologies: ["React JS", "Tailwind CSS", "three JS"],
             image: "https://via.placeholder.com/300x200?text=AI+Companion",
-            githubLink: "#",
+            githubLink: "https://github.com/keval008/My-Portfolio",
             liveLink: "#"
         },
         {
