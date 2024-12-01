@@ -39,7 +39,7 @@ const ProjectsSection = () => {
             technologies: ["React JS", "Tailwind CSS", "three JS"],
             image: "/logo.png",
             githubLink: "https://github.com/keval008/My-Portfolio",
-            liveLink: "https://my-portfolio-28zjivexi-keval-dhandhukiyas-projects.vercel.app/"
+            liveLink: "https://my-portfolio-tau-eight-54.vercel.app/"
         },
 
     ];
