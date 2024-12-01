@@ -37,26 +37,11 @@ const ProjectsSection = () => {
             title: "My Portfolio",
             description: "A Personal Portfolio Website",
             technologies: ["React JS", "Tailwind CSS", "three JS"],
-            image: "https://via.placeholder.com/300x200?text=AI+Companion",
+            image: "/logo.png",
             githubLink: "https://github.com/keval008/My-Portfolio",
-            liveLink: "#"
+            liveLink: "https://my-portfolio-28zjivexi-keval-dhandhukiyas-projects.vercel.app/"
         },
-        {
-            title: "E-Commerce Microservices",
-            description: "Scalable e-commerce platform with microservices architecture",
-            technologies: ["React", "Node.js", "Docker", "Kubernetes"],
-            image: "https://via.placeholder.com/300x200?text=E-Commerce",
-            githubLink: "#",
-            liveLink: "#"
-        },
-        {
-            title: "Real-time Chat Application",
-            description: "WebSocket-based chat app with end-to-end encryption",
-            technologies: ["React", "Socket.io", "Express", "MongoDB"],
-            image: "https://via.placeholder.com/300x200?text=Chat+App",
-            githubLink: "#",
-            liveLink: "#"
-        }
+
     ];
 
     return (
@@ -72,14 +57,15 @@ const ProjectsSection = () => {
                 </h2>
 
                 <Swiper
-                    autoplay={{ delay: 1000 }}
+                    modules={[Autoplay]}
+                    autoplay={{ delay: 8000 }}
                     breakpoints={{
                         640: { slidesPerView: 1 },
                         768: { slidesPerView: 2 },
                         1024: { slidesPerView: 3 },
                     }}
                     spaceBetween={30}
-                    className="px-10"
+                    className="px-10 !overflow-visible"
                 >
                     {projects.map((project, index) => (
                         <SwiperSlide key={index}>
