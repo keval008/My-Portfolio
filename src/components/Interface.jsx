@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaBootstrap, FaGitAlt, FaNodeJs } from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs, SiPostgresql } from "react-icons/si";
+import { SiTailwindcss, SiNextdotjs, SiPostgresql, SiMysql, SiSocketdotio, SiMaterialdesign, SiMaterialdesignicons, SiUikit, SiMui, SiRedux } from "react-icons/si";
 import { useSpring, animated } from "react-spring";
 import { Autoplay, EffectCards } from 'swiper/modules';
 import ProjectCard from './Projectcard';
@@ -77,7 +77,7 @@ const ProjectsSection = () => {
     {
       title: "My Portfolio",
       description: "A Personal Portfolio Website",
-      technologies: ["React JS", "Tailwind CSS", "three JS"],
+      technologies: ["Vite JS", "Tailwind CSS", "three JS"],
       image: "/keval.png",
       githubLink: "https://github.com/keval008/My-Portfolio",
       liveLink: "https://my-portfolio-tau-eight-54.vercel.app/"
@@ -125,12 +125,18 @@ const AboutSection = () => {
       <div className="text-center flex flex-col items-center">
         <motion.h1
           className="text-6xl font-extrabold leading-snug text-gray-900 mb-6"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5 }}
         >
           Hi, I'm
-          <br />
+        </motion.h1>
+        <motion.h1
+          className="text-6xl font-extrabold leading-snug text-gray-900 mb-6"
+          initial={{ opacity: 0, x: -200 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5, delay: 2 }}
+        >
           <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent px-2 italic">
             Keval Dhandhukiya
           </span>
@@ -139,16 +145,16 @@ const AboutSection = () => {
           className="text-lg text-gray-700 mt-4 max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 3 }}
         >
           I am a full-stack web developer<br />
-          passionate about growing my knowledge and skills.
+          passionate about growing my knowledge and skills
         </motion.p>
         <motion.button
           className="mt-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-8 rounded-full font-semibold text-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 4 }}
         >
           Contact Me
         </motion.button>
@@ -158,16 +164,20 @@ const AboutSection = () => {
 };
 
 const skills = [
-  { title: "React Js", icon: <FaReact className="text-blue-500 w-16 h-16" /> },
-  { title: "Node Js", icon: <FaNodeJs className="text-green-500 w-16 h-16" /> },
-  { title: "HTML", icon: <FaHtml5 className="text-orange-500 w-16 h-16" /> },
-  { title: "CSS", icon: <FaCss3Alt className="text-blue-600 w-16 h-16" /> },
-  { title: "JavaScript", icon: <FaJs className="text-yellow-500 w-16 h-16" /> },
-  { title: "Bootstrap", icon: <FaBootstrap className="text-purple-600 w-16 h-16" /> },
-  { title: "Tailwind", icon: <SiTailwindcss className="text-teal-500 w-16 h-16" /> },
-  { title: "Next.js", icon: <SiNextdotjs className="text-black w-16 h-16" /> },
-  { title: "Git & GitHub", icon: <FaGitAlt className="text-red-500 w-16 h-16" /> },
-  { title: "PostgreSQL", icon: <SiPostgresql className="text-blue-400 w-16 h-16" /> },
+  { title: "React Js", icon: <FaReact className="text-blue-500 w-[64px] h-[64px]" /> },
+  { title: "Node Js", icon: <FaNodeJs className="text-green-500 w-[64px] h-[64px]" /> },
+  { title: "HTML", icon: <FaHtml5 className="text-orange-500 w-[64px] h-[64px]" /> },
+  { title: "CSS", icon: <FaCss3Alt className="text-blue-600 w-[64px] h-[64px]" /> },
+  { title: "JavaScript", icon: <FaJs className="text-yellow-500 w-[64px] h-[64px]" /> },
+  { title: "Bootstrap", icon: <FaBootstrap className="text-purple-600 w-[64px] h-[64px]" /> },
+  { title: "Tailwind", icon: <SiTailwindcss className="text-teal-500 w-[64px] h-[64px]" /> },
+  { title: "Next.js", icon: <SiNextdotjs className="text-black w-[64px] h-[64px]" /> },
+  { title: "Git & GitHub", icon: <FaGitAlt className="text-red-500 w-[64px] h-[64px]" /> },
+  { title: "PostgreSQL", icon: <SiPostgresql className="text-blue-400 w-[64px] h-[64px]" /> },
+  { title: "MySQL", icon: <SiMysql className="text-blue-400 w-[64px] h-[64px]" /> },
+  { title: "Soket.io", icon: <SiSocketdotio className="text-black w-[64px] h-[64px]" /> },
+  { title: "Material UI", icon: <SiMui className="text-blue-600 w-[64px] h-[64px]" /> },
+  { title: "Redux", icon: <SiRedux className="text-purple-600 w-[64px] h-[64px]" /> },
 ];
 
 const SkillCard = ({ skill }) => {
@@ -210,7 +220,11 @@ const SkillsSection = () => {
   return (
     <Section>
       <motion.div whileInView={"visible"} className="container mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-10">My Playground</h2>
+        <h2 className="text-5xl font-bold text-center mb-10 relative text-glow">
+          My Playground
+
+        </h2>
+
         <Swiper
           spaceBetween={30}
           slidesPerView={3}
