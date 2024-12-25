@@ -11,23 +11,212 @@ body {
   margin: 0;
 }
 
+/* Card Styles */
 .card-container {
-  perspective: 1000px;
-}
-.card {
-  transition: transform 0.6s;
+  perspective: 2000px;
   transform-style: preserve-3d;
+  outline: none !important;
 }
+
+.card {
+  position: relative;
+  transition: all 1.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  outline: none !important;
+}
+
 .card-front,
 .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  /* Prevent blue flash on mobile */
 }
+
+/* Remove focus outlines and tap highlights */
+* {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove blue highlight on click/tap for mobile */
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .card-back {
   transform: rotateY(180deg);
 }
+
 .card.flipped {
   transform: rotateY(180deg);
+}
+
+/* Scrollbar Styles - Webkit browsers */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  background-clip: content-box !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  background-clip: content-box !important;
+}
+
+/* Specific scrollbar for card-back */
+.card-back::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.card-back::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+}
+
+.card-back::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  background-clip: content-box !important;
+}
+
+.card-back::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  background-clip: content-box !important;
+}
+
+/* Firefox scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.loader-line {
+  width: 100px;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom right, #7a0e9b, #e912b3);
+  border-radius: 20px;
+}
+
+.loader-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 3px;
+  width: 40%;
+  background-color: #ffffff;
+  animation: lineAnim 1s linear infinite;
+  border-radius: 20px;
+}
+.head {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #d646cf, #2072ff);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  animation: revealText 1s ease forwards;
+}
+
+.head span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealLetters 0.5s ease forwards;
+}
+
+@keyframes revealText {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes revealLetters {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add animation delay for each letter */
+.head span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.head span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.head span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.head span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.head span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.head span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.head span:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.head span:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.head span:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.head span:nth-child(10) {
+  animation-delay: 1s;
+}
+
+@keyframes lineAnim {
+  0% {
+    left: -10%;
+    background-color: #ffffff;
+  }
+  25% {
+    left: 10%;
+    background-color: blue;
+  }
+  50% {
+    left: 10%;
+    background-color: green;
+  }
+  75% {
+    left: 10%;
+    background-color: red;
+  }
+  100% {
+    left: 150%;
+    background-color: yellow;
+  }
 }

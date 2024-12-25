@@ -36,19 +36,20 @@ const Section = (props) => {
   );
 };
 
-export const Interface = () => {
+export const Interface = ({ setSection, section }) => {
   return (
     <div className="flex flex-col items-center w-screen">
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
+      <AboutSection setSection={setSection} />
+      <SkillsSection section={section} />
+      <ProjectsSection section={section} />
       <ContactSection />
     </div>
   );
 };
 
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ section }) => {
+
   const projects = [
     {
       title: "My Jewlex",
@@ -93,18 +94,25 @@ const ProjectsSection = () => {
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4"
       >
-        <h2 className="text-5xl font-bold text-center mb-12 text-gray-800">
-          Some Of My Projects And The Projects I Worked On
-        </h2>
+        <div className="flex flex-col items-center justify-center w-full mb-12">
+          <h2 className={`text-5xl !overflow-visible text-overflow-clip font-bold text-center pb-4 relative  text-glow ${section === 2 ? "head block" : "hidden"}`}>
+            <span>Some&nbsp;</span>
+            <span>Of&nbsp;</span>
+            <span>My&nbsp;</span>
+            <span>Projects&nbsp;</span>
+            <span>I&nbsp;</span>
+            <span>Worked&nbsp;</span>
+            <span>On</span>
+          </h2>
+        </div>
 
         <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 8000 }}
           breakpoints={{
-            640: { slidesPerView: 1 },
+            0: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
+          slidesPerView={3}
           spaceBetween={30}
           className="px-10 !overflow-visible"
         >
@@ -119,7 +127,7 @@ const ProjectsSection = () => {
   );
 };
 
-const AboutSection = () => {
+const AboutSection = ({ setSection }) => {
   return (
     <Section>
       <div className="text-center flex flex-col items-center">
@@ -127,15 +135,20 @@ const AboutSection = () => {
           className="text-6xl font-extrabold leading-snug text-gray-900 mb-6"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1 }}
         >
           Hi, I'm
         </motion.h1>
         <motion.h1
           className="text-6xl font-extrabold leading-snug text-gray-900 mb-6"
-          initial={{ opacity: 0, x: -200 }}
+          initial={{ opacity: 0, x: -1000 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5, delay: 2 }}
+          transition={{
+            type: "spring",
+            duration: 2,
+            delay: 1,
+            bounce: 0.3
+          }}
         >
           <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent px-2 italic">
             Keval Dhandhukiya
@@ -143,18 +156,21 @@ const AboutSection = () => {
         </motion.h1>
         <motion.p
           className="text-lg text-gray-700 mt-4 max-w-md"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1 }}
         >
           I am a full-stack web developer<br />
           passionate about growing my knowledge and skills
         </motion.p>
         <motion.button
-          className="mt-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-8 rounded-full font-semibold text-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300"
-          initial={{ opacity: 0, y: 20 }}
+          onClick={() => {
+            setSection(3);
+          }}
+          className="mt-10 bg-gradient-to-r animate-bounce from-indigo-600 to-purple-600 text-white py-3 px-8 rounded-full font-semibold text-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300"
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 4 }}
+          transition={{ duration: 1, delay: 2 }}
         >
           Contact Me
         </motion.button>
@@ -175,9 +191,7 @@ const skills = [
   { title: "Git & GitHub", icon: <FaGitAlt className="text-red-500 w-[64px] h-[64px]" /> },
   { title: "PostgreSQL", icon: <SiPostgresql className="text-blue-400 w-[64px] h-[64px]" /> },
   { title: "MySQL", icon: <SiMysql className="text-blue-400 w-[64px] h-[64px]" /> },
-  { title: "Soket.io", icon: <SiSocketdotio className="text-black w-[64px] h-[64px]" /> },
-  { title: "Material UI", icon: <SiMui className="text-blue-600 w-[64px] h-[64px]" /> },
-  { title: "Redux", icon: <SiRedux className="text-purple-600 w-[64px] h-[64px]" /> },
+
 ];
 
 const SkillCard = ({ skill }) => {
@@ -216,13 +230,20 @@ const SkillCard = ({ skill }) => {
     </motion.div>
   );
 };
-const SkillsSection = () => {
+const SkillsSection = ({ section }) => {
   return (
     <Section>
-      <motion.div whileInView={"visible"} className="container mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-10 relative text-glow">
-          My Playground
-
+      <motion.div whileInView={"visible"} className="container mx-auto flex flex-col items-center justify-center !overflow-visible">
+        <h2 className={`text-6xl mb-12 !overflow-visible text-overflow-clip font-bold text-center pb-4 relative  text-glow ${section === 1 ? "head block" : "hidden"}`}>
+          <span>My </span>
+          <span>{" "}</span>
+          <span>Play</span>
+          <span>g</span>
+          <span>r</span>
+          <span>o</span>
+          <span>u</span>
+          <span>n</span>
+          <span>d</span>
         </h2>
 
         <Swiper
@@ -233,7 +254,7 @@ const SkillsSection = () => {
             768: { slidesPerView: 3 },
             1024: { slidesPerView: 5 },
           }}
-          className="w-full flex items-center !overflow-visible flex-col"
+          className="w-full !overflow-visible flex items-center flex-col"
         >
           {skills.map((skill, index) => (
             <SwiperSlide key={index} className="flex items-center w-full justify-center">

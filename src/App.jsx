@@ -3,16 +3,21 @@ import { Canvas } from "@react-three/fiber";
 import { MotionConfig } from "framer-motion";
 import { Leva } from "leva";
 import { useEffect, useState } from "react";
-import { Experience } from "./components/Experience";
+import { Hero } from "./components/Hero";
 import { Interface } from "./components/Interface";
 import { Menu } from "./components/Menu";
 import { ScrollManager } from "./components/ScrollManager";
 import { framerMotionConfig } from "./config";
-
+import { Suspense } from "react";
+import "./index.css";
 function App() {
   const [section, setSection] = useState(0);
   const [menuOpened, setMenuOpened] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
+  const handleHeroLoaded = () => {
+    setHeroLoaded(true);
+  };
   useEffect(() => {
     setMenuOpened(false);
   }, [section]);
@@ -29,11 +34,13 @@ function App() {
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
             <Scroll>
-              <Experience section={section} menuOpened={menuOpened} />
+              <Suspense fallback={"..."}>
+                <Hero section={section} menuOpened={menuOpened} onLoaded={handleHeroLoaded} />
+              </Suspense>
             </Scroll>
-            <Scroll html>
-              <Interface />
-            </Scroll>
+            {heroLoaded && <Scroll html>
+              <Interface section={section} setSection={setSection} />
+            </Scroll>}
           </ScrollControls>
         </Canvas>
         <Menu
