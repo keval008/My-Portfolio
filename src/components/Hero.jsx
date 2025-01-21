@@ -9,7 +9,7 @@ import {
   AdaptiveDpr,
   AdaptiveEvents,
   BakeShadows,
-  useDetectGPU
+  useDetectGPU,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useMotionValue } from "framer-motion";
@@ -18,7 +18,7 @@ import { useEffect, useState, Suspense, useMemo } from "react";
 import { framerMotionConfig } from "../config";
 import { Avatar } from "./Avatar";
 import { Office } from "./Office";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 export const Hero = (props) => {
   const { section, menuOpened, onLoaded } = props;
@@ -37,39 +37,48 @@ export const Hero = (props) => {
   const cameraLookAtX = useMotionValue();
 
   // Memoize materials to prevent unnecessary recreations
-  const materials = useMemo(() => ({
-    redSphere: <MeshDistortMaterial
-      opacity={0.8}
-      transparent
-      distort={degraded ? 0.2 : 0.4}
-      speed={degraded ? 2 : 4}
-      color={"red"}
-    />,
-    yellowSphere: <MeshDistortMaterial
-      opacity={0.8}
-      transparent
-      distort={degraded ? 0.5 : 1}
-      speed={degraded ? 2 : 5}
-      color="yellow"
-    />,
-    blueCube: <MeshWobbleMaterial
-      opacity={0.8}
-      transparent
-      factor={degraded ? 0.5 : 1}
-      speed={degraded ? 2 : 5}
-      color={"blue"}
-    />
-  }), [degraded]);
+  const materials = useMemo(
+    () => ({
+      redSphere: (
+        <MeshDistortMaterial
+          opacity={0.8}
+          transparent
+          distort={degraded ? 0.2 : 0.4}
+          speed={degraded ? 2 : 4}
+          color={"red"}
+        />
+      ),
+      yellowSphere: (
+        <MeshDistortMaterial
+          opacity={0.8}
+          transparent
+          distort={degraded ? 0.5 : 1}
+          speed={degraded ? 2 : 5}
+          color="yellow"
+        />
+      ),
+      blueCube: (
+        <MeshWobbleMaterial
+          opacity={0.8}
+          transparent
+          factor={degraded ? 0.5 : 1}
+          speed={degraded ? 2 : 5}
+          color={"blue"}
+        />
+      ),
+    }),
+    [degraded]
+  );
 
   // Camera movement effect with optimized animation
   useEffect(() => {
     const animation = animate(cameraPositionX, menuOpened ? -5 : 0, {
       ...framerMotionConfig,
-      duration: degraded ? 0.5 : 1
+      duration: degraded ? 0.5 : 1,
     });
     const animation2 = animate(cameraLookAtX, menuOpened ? 5 : 0, {
       ...framerMotionConfig,
-      duration: degraded ? 0.5 : 1
+      duration: degraded ? 0.5 : 1,
     });
 
     return () => {
@@ -85,35 +94,63 @@ export const Hero = (props) => {
   });
 
   // Memoize floating elements to prevent unnecessary rerenders
-  const FloatingElements = useMemo(() => (
-    <>
-      <Float speed={degraded ? 2 : 4} rotationIntensity={degraded ? 1 : 2} floatIntensity={degraded ? 2 : 4}>
-        <mesh position={[1, -3, -15]} scale={[2, 2, 2]}>
-          <sphereGeometry args={[1, degraded ? 16 : 32, degraded ? 16 : 32]} />
-          {materials.redSphere}
-        </mesh>
-      </Float>
+  const FloatingElements = useMemo(
+    () => (
+      <>
+        <Float
+          speed={degraded ? 2 : 4}
+          rotationIntensity={degraded ? 1 : 2}
+          floatIntensity={degraded ? 2 : 4}
+        >
+          <mesh position={[1, -3, -15]} scale={[2, 2, 2]}>
+            <sphereGeometry
+              args={[1, degraded ? 16 : 32, degraded ? 16 : 32]}
+            />
+            {materials.redSphere}
+          </mesh>
+        </Float>
 
-      <Float speed={degraded ? 2 : 5} rotationIntensity={degraded ? 1.5 : 3} floatIntensity={degraded ? 2.5 : 5}>
-        <mesh scale={[3, 3, 3]} position={[3, 1, -18]}>
-          <sphereGeometry args={[1, degraded ? 16 : 32, degraded ? 16 : 32]} />
-          {materials.yellowSphere}
-        </mesh>
-      </Float>
+        <Float
+          speed={degraded ? 2 : 5}
+          rotationIntensity={degraded ? 1.5 : 3}
+          floatIntensity={degraded ? 2.5 : 5}
+        >
+          <mesh scale={[3, 3, 3]} position={[3, 1, -18]}>
+            <sphereGeometry
+              args={[1, degraded ? 16 : 32, degraded ? 16 : 32]}
+            />
+            {materials.yellowSphere}
+          </mesh>
+        </Float>
 
-      <Float speed={degraded ? 3 : 6} rotationIntensity={degraded ? 1 : 2} floatIntensity={degraded ? 1.5 : 3}>
-        <mesh scale={[1.4, 1.4, 1.4]} position={[-3, -1, -11]}>
-          <boxGeometry args={[1, 1, 1, degraded ? 1 : 2, degraded ? 1 : 2, degraded ? 1 : 2]} />
-          {materials.blueCube}
-        </mesh>
-      </Float>
-    </>
-  ), [degraded, materials]);
+        <Float
+          speed={degraded ? 3 : 6}
+          rotationIntensity={degraded ? 1 : 2}
+          floatIntensity={degraded ? 1.5 : 3}
+        >
+          <mesh scale={[1.4, 1.4, 1.4]} position={[-3, -1, -11]}>
+            <boxGeometry
+              args={[
+                1,
+                1,
+                1,
+                degraded ? 1 : 2,
+                degraded ? 1 : 2,
+                degraded ? 1 : 2,
+              ]}
+            />
+            {materials.blueCube}
+          </mesh>
+        </Float>
+      </>
+    ),
+    [degraded, materials]
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onLoaded();  // Notify parent component that Hero has loaded
-    }, 2000);  // Assume it takes 2 seconds to load resources
+      onLoaded(); // Notify parent component that Hero has loaded
+    }, 200); // Assume it takes 2 seconds to load resources
 
     return () => clearTimeout(timer);
   }, [onLoaded]);
@@ -150,7 +187,7 @@ export const Hero = (props) => {
             y: section === 0 ? 0 : -1,
           }}
         >
-          <Office section={section} />
+          {/* <Office section={section} /> */}
         </motion.group>
 
         {/* SKILLS Section */}
@@ -161,15 +198,18 @@ export const Hero = (props) => {
             y: section === 1 ? -viewport.height : -1.5,
           }}
         >
-          <directionalLight position={[-5, 3, 5]} intensity={degraded ? 0.6 : 0.4} />
+          <directionalLight
+            position={[-5, 3, 5]}
+            intensity={degraded ? 0.6 : 0.4}
+          />
 
           {/* Floating Elements - Only render if not super degraded */}
           {!degraded && FloatingElements}
 
           {/* Avatar - Always render with optimizations */}
-          <group scale={[2, 2, 2]} position-y={-1.5}>
-            <Avatar animation={section === 0 ? "Falling" : "Standing"} />
-          </group>
+          {/* <group scale={[2, 2, 2]} position-y={-1.5}>
+            <Avatar animation={section === 0 ? "Falling" : "Standing"} /> 
+          </group> */}
         </motion.group>
       </Suspense>
 
@@ -177,4 +217,3 @@ export const Hero = (props) => {
     </>
   );
 };
-
